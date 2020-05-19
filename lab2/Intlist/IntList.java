@@ -82,6 +82,9 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
+        if (A == null) {
+            return null;
+        }
         IntList ptr = A;
         IntList cat = B;
         while (ptr.rest != null) {
@@ -99,23 +102,32 @@ public class IntList {
      * Returns a list consisting of the elements of A followed by the
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
+//    public static IntList catenate(IntList A, IntList B) {
+//        //TODO:  fill in method
+//
+//        IntList toReturn = new IntList(A.first, null);
+//        IntList ptrT = toReturn;
+//        A = A.rest;
+//        while (A != null) {
+//            ptrT.rest = new IntList(A.first, null);
+//            A = A.rest;
+//            ptrT = ptrT.rest;
+//        }
+//        while (B != null) {
+//            ptrT.rest = new IntList(B.first, null);
+//            B = B.rest;
+//            ptrT = ptrT.rest;
+//        }
+//        return toReturn;
+//    }
+
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
+        if (A == null) {
+            return B;
+        }
+        return new IntList(A.first, catenate(A.rest, B));
 
-        IntList toReturn = new IntList(A.first, null);
-        IntList ptrT = toReturn;
-        A = A.rest;
-        while (A != null) {
-            ptrT.rest = new IntList(A.first, null);
-            A = A.rest;
-            ptrT = ptrT.rest;
-        }
-        while (B != null) {
-            ptrT.rest = new IntList(B.first, null);
-            B = B.rest;
-            ptrT = ptrT.rest;
-        }
-        return toReturn;
     }
 
 
