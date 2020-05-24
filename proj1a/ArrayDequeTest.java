@@ -64,22 +64,25 @@ public class ArrayDequeTest {
     }
 
     @Test
-    public void testGet() {
+    public void testRandom() {
         ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addLast(4);
         A.addLast(5);
-        A.addLast(10);
-        A.addLast(15);
-        A.addLast(20);
-        int act1 = A.get(0);
-        int exp1 = 5;
-        int act2 = A.get(1);
-        int exp2 = 10;
-        int act3 = A.get(2);
-        int exp3 = 15;
-        assertEquals(exp1, act1);
-        assertEquals(exp2, act2);
-        assertEquals(exp3, act3);
+        A.addLast(6);
+        A.addLast(7);
+        A.addLast(8);
+        A.addFirst(3);
+        A.addFirst(2);
+        A.addFirst(1);
+        A.addFirst(0);
+        int act = A.removeLast();
+        int exp = 8;
+
+        assertEquals(exp, act);
+//        assertEquals(exp2, act2);
+//        assertEquals(exp3, act3);
     }
+
 
     @Test
     public void testResize() {

@@ -56,7 +56,7 @@ public class ArrayDeque<T> {
 
     public T removeFirst() {
         if (size == 0) return null;
-        if (getUA() < 0.25 && capacity > 8) {
+        if (getUA() < 0.25) {
             resize(items.length / 2);
         }
 
@@ -70,7 +70,7 @@ public class ArrayDeque<T> {
 
     public T removeLast() {
         if (size == 0) return null;
-        if (getUA() < 0.25 && capacity > 8) {
+        if (getUA() < 0.25) {
             resize(items.length / 2);
         }
 
@@ -90,7 +90,17 @@ public class ArrayDeque<T> {
 
     public void resize(int capacity) {
         T[] copy = (T[]) new Object[capacity];
-        System.arraycopy(items, 0, copy, 0, size);
+        int count = size;
+        int start = 0;
+        int p = nextFirst + 1;
+        while(count != 0) {
+            copy[start] = items[Math.floorMod(p, size)];
+            start++;
+            count--;
+            p++;
+
+        }
+//        System.arraycopy(items, 0, copy, 0, size);
         items = copy;
         this.capacity = capacity;
         nextFirst = capacity - 1;
