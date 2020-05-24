@@ -11,18 +11,24 @@ public class ArrayDeque<T> {
         capacity = 8;
         items = (T[]) new Object[capacity];
         size = 0;
-        nextFirst = 4;
-        nextLast = 5;
+        nextFirst = 7;
+        nextLast = 0;
     }
 
 
     public void addFirst(T item) {
+        if (size == items.length) {
+            resize(size * 2);
+        }
         items[nextFirst] = item;
         size++;
         nextFirst = (nextFirst - 1) % capacity;
     }
 
     public void addLast(T item) {
+        if (size == items.length) {
+            resize(size * 2);
+        }
         items[nextLast] = item;
         size++;
         nextLast = (nextLast + 1) % capacity;
@@ -50,6 +56,10 @@ public class ArrayDeque<T> {
 
     public T removeFirst() {
         if (size == 0) return null;
+        if (size / items.length < 0.25) {
+            resize(size / 2);
+        }
+
         int p = (nextFirst + 1) % capacity;
         T toReturn = items[p];
         items[p] = null;
@@ -60,6 +70,11 @@ public class ArrayDeque<T> {
 
     public T removeLast() {
         if (size == 0) return null;
+        double ua = size / (double) items.length;
+        if (ua < 0.25) {
+            resize(items.length / 2);
+        }
+
         int p = (nextLast - 1) % capacity;
         T toReturn = items[p];
         items[p] = null;
@@ -74,17 +89,14 @@ public class ArrayDeque<T> {
         return items[p];
     }
 
-//    public static void main (String[] parms) {
-//        ArrayDeque<Integer> x = new ArrayDeque<>();
-//        x.addLast(5);
-//        x.addFirst(4);
-//        x.addLast(6);
-//        System.out.println(x.get(2));
-//        x.printDeque();
-//
-//        x.removeLast();
-//        x.removeFirst();
-//
-//        x.printDeque();
-//    }
+    public void resize(int capacity) {
+        T[] copy = (T[]) new Object[capacity];
+        System.arraycopy(items, 0, copy, 0, size);
+        items = copy;
+        this.capacity = capacity;
+        nextFirst = capacity - 1;
+        nextLast = size;
+    }
+
+
 }

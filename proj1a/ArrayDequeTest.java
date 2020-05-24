@@ -64,5 +64,141 @@ public class ArrayDequeTest {
 
     }
 
+    @Test
+    public void testGet() {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addLast(5);
+        A.addLast(10);
+        A.addLast(15);
+        A.addLast(20);
+        int act1 = A.get(0);
+        int exp1 = 5;
+        int act2 = A.get(1);
+        int exp2 = 10;
+        int act3 = A.get(2);
+        int exp3 = 15;
+        assertEquals(exp1, act1);
+        assertEquals(exp2, act2);
+        assertEquals(exp3, act3);
+    }
+
+    @Test
+    public void testResize() {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addLast(1);
+        A.addLast(2);
+        A.addLast(3);
+        A.addLast(4);
+        A.addLast(5);
+        A.addLast(6);
+        A.addLast(7);
+        A.addLast(8);
+        A.addLast(9);
+        int act = A.size();
+        int exp = 9;
+
+        assertEquals(exp, act);
+    }
+
+    @Test
+    public void testResize1() {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addLast(1);
+        A.addLast(2);
+        A.addLast(3);
+        A.addLast(4);
+        A.addLast(5);
+        A.addLast(6);
+        A.addLast(7);
+        A.addLast(8);
+        A.addLast(9);
+        int act1 = A.get(8);
+        int exp1 = 9;
+        int act2 = A.get(5);
+        int exp2 = 6;
+
+        assertEquals(exp1, act1);
+        assertEquals(exp2, act2);
+
+    }
+
+    @Test
+    public void testResize2() {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addLast(1);
+        A.addLast(2);
+        A.addLast(3);
+        A.addLast(4);
+        A.addLast(5);
+        A.addLast(6);
+        A.addLast(7);
+        A.addLast(8);
+        A.addLast(9);
+        int act1 = A.get(8);
+        int exp1 = 9;
+        int act2 = A.get(5);
+        int exp2 = 6;
+
+        assertEquals(exp1, act1);
+        assertEquals(exp2, act2);
+
+    }
+
+    @Test
+    public void testResize3() {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addLast(1);
+        A.addLast(2);
+        A.addLast(3);
+        A.addLast(4);
+        A.addLast(5);
+        A.addLast(6);
+        A.addLast(7);
+        A.addLast(8);
+        A.addLast(9);
+//        for(int i = 0; i < 6; i++) {
+//            A.removeLast();
+//        }
+        A.removeLast();
+        A.removeLast();
+
+        A.removeLast();
+        A.removeLast();
+        A.removeLast();
+        A.removeLast();
+        A.removeLast();
+
+        int act1 = A.size();
+        int exp1 = 3;
+
+
+        assertEquals(exp1, act1);
+
+    }
+
+    @Test
+    public void testResize4() {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addLast(1);
+        A.addLast(2);
+        A.addLast(3);
+        A.addLast(4);
+        A.addLast(5);
+        A.addLast(6);
+        A.addLast(7);
+        A.addLast(8);
+        A.addLast(9);
+        A.removeLast();
+        A.removeLast();
+        A.removeLast();
+        A.removeLast();
+        A.removeLast();
+        A.removeLast();
+        A.removeLast();
+        int act1 = A.get(1);
+        int exp1 = 2;
+        assertEquals(exp1, act1);
+
+    }
 
 }
