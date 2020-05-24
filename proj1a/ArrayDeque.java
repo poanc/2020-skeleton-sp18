@@ -22,7 +22,7 @@ public class ArrayDeque<T> {
         }
         items[nextFirst] = item;
         size++;
-        nextFirst = (nextFirst - 1) % capacity;
+        nextFirst = minusOne(nextFirst);
     }
 
     public void addLast(T item) {
@@ -31,7 +31,7 @@ public class ArrayDeque<T> {
         }
         items[nextLast] = item;
         size++;
-        nextLast = (nextLast + 1) % capacity;
+        nextLast = plusOne(nextLast);
 
     }
 
@@ -56,30 +56,29 @@ public class ArrayDeque<T> {
 
     public T removeFirst() {
         if (size == 0) return null;
-        if (size / items.length < 0.25) {
-            resize(size / 2);
+        if (getUA() < 0.25 && capacity > 8) {
+            resize(items.length / 2);
         }
 
-        int p = (nextFirst + 1) % capacity;
+        nextFirst = plusOne(nextFirst);
+        int p = nextFirst;
         T toReturn = items[p];
         items[p] = null;
         size--;
-        nextFirst = (nextFirst + 1) % capacity;
         return toReturn;
     }
 
     public T removeLast() {
         if (size == 0) return null;
-        double ua = size / (double) items.length;
-        if (ua < 0.25) {
+        if (getUA() < 0.25 && capacity > 8) {
             resize(items.length / 2);
         }
 
-        int p = (nextLast - 1) % capacity;
+        nextLast = minusOne(nextLast);
+        int p = nextLast;
         T toReturn = items[p];
         items[p] = null;
         size--;
-        nextLast = (nextLast - 1) % capacity;
         return toReturn;
     }
 
@@ -96,6 +95,20 @@ public class ArrayDeque<T> {
         this.capacity = capacity;
         nextFirst = capacity - 1;
         nextLast = size;
+    }
+
+    /** return current items usage ratio*/
+    private double getUA() {
+        return size / (double) items.length;
+    }
+
+    private int minusOne(int n) {
+        return Math.floorMod(n - 1, capacity);
+
+    }
+
+    private int plusOne(int n) {
+        return Math.floorMod(n + 1, capacity);
     }
 
 

@@ -39,7 +39,6 @@ public class ArrayDequeTest {
         A.addFirst(1);
         A.removeLast();
         A.removeFirst();
-        A.printDeque();
         A.addLast(10);
         A.addLast(5);
         int first = A.removeFirst();
@@ -169,7 +168,7 @@ public class ArrayDequeTest {
         A.removeLast();
 
         int act1 = A.size();
-        int exp1 = 3;
+        int exp1 = 2;
 
 
         assertEquals(exp1, act1);
@@ -198,6 +197,26 @@ public class ArrayDequeTest {
         int act1 = A.get(1);
         int exp1 = 2;
         assertEquals(exp1, act1);
+
+    }
+
+    @Test
+    public void testRemove5() {
+        ArrayDeque<Integer> ArrayDeque = new ArrayDeque<>();
+        boolean test1 = ArrayDeque.isEmpty();
+        ArrayDeque.addLast(1);
+        ArrayDeque.addLast(2);
+        ArrayDeque.addLast(3);
+        ArrayDeque.addLast(4);
+        ArrayDeque.addLast(5);
+        ArrayDeque.addLast(6);
+        ArrayDeque.addLast(7);
+        ArrayDeque.addLast(8);
+        int act = ArrayDeque.removeLast();
+        int exp = 8;
+
+        assertEquals(exp, act);
+        assertTrue(test1);
 
     }
 
