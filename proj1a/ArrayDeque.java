@@ -88,21 +88,20 @@ public class ArrayDeque<T> {
         return items[p];
     }
 
-    public void resize(int capacity) {
-        T[] copy = (T[]) new Object[capacity];
+    public void resize(int newCapacity) {
+        T[] copy = (T[]) new Object[newCapacity];
         int count = size;
         int start = 0;
         int p = nextFirst + 1;
         while(count != 0) {
-            copy[start] = items[Math.floorMod(p, size)];
+            copy[start] = items[Math.floorMod(p, capacity)];
             start++;
             count--;
             p++;
-
         }
 //        System.arraycopy(items, 0, copy, 0, size);
         items = copy;
-        this.capacity = capacity;
+        capacity = newCapacity;
         nextFirst = capacity - 1;
         nextLast = size;
     }

@@ -223,4 +223,19 @@ public class ArrayDequeTest {
 
     }
 
+    @Test
+    public void testRandom2() {
+        ArrayDeque<Integer> ArrayDeque = new ArrayDeque<>();
+        ArrayDeque.addFirst(0);
+        ArrayDeque.addFirst(1);
+        int act1 = ArrayDeque.removeFirst();
+        int act2 = ArrayDeque.removeFirst();
+        int exp1 = 1;
+        int exp2 = 0;
+
+        assertEquals(exp1, act1);
+        assertEquals(exp2, act2);
+
+    }
+
 }
