@@ -49,6 +49,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (size == 0) return null;
         int p = (nextFirst + 1) % capacity;
         T toReturn = items[p];
         items[p] = null;
@@ -58,11 +59,12 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) return null;
         int p = (nextLast - 1) % capacity;
         T toReturn = items[p];
         items[p] = null;
         size--;
-        nextLast = (nextLast + 1) % capacity;
+        nextLast = (nextLast - 1) % capacity;
         return toReturn;
     }
 
@@ -72,17 +74,17 @@ public class ArrayDeque<T> {
         return items[p];
     }
 
-    public static void main (String[] parms) {
-        ArrayDeque<Integer> x = new ArrayDeque<>();
-        x.addLast(5);
-        x.addFirst(4);
-        x.addLast(6);
-        System.out.println(x.get(2));
-        x.printDeque();
-
-        x.removeLast();
-        x.removeFirst();
-
-        x.printDeque();
-    }
+//    public static void main (String[] parms) {
+//        ArrayDeque<Integer> x = new ArrayDeque<>();
+//        x.addLast(5);
+//        x.addFirst(4);
+//        x.addLast(6);
+//        System.out.println(x.get(2));
+//        x.printDeque();
+//
+//        x.removeLast();
+//        x.removeFirst();
+//
+//        x.printDeque();
+//    }
 }
