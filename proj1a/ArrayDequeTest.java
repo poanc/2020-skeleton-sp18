@@ -205,17 +205,17 @@ public class ArrayDequeTest {
 
     @Test
     public void testRemove5() {
-        ArrayDeque<Integer> ArrayDeque = new ArrayDeque<>();
+        ArrayDeque<Integer> A = new ArrayDeque<>();
         boolean test1 = ArrayDeque.isEmpty();
-        ArrayDeque.addLast(1);
-        ArrayDeque.addLast(2);
-        ArrayDeque.addLast(3);
-        ArrayDeque.addLast(4);
-        ArrayDeque.addLast(5);
-        ArrayDeque.addLast(6);
-        ArrayDeque.addLast(7);
-        ArrayDeque.addLast(8);
-        int act = ArrayDeque.removeLast();
+        A.addLast(1);
+        A.addLast(2);
+        A.addLast(3);
+        A.addLast(4);
+        A.addLast(5);
+        A.addLast(6);
+        A.addLast(7);
+        A.addLast(8);
+        int act = A.removeLast();
         int exp = 8;
 
         assertEquals(exp, act);
@@ -225,11 +225,11 @@ public class ArrayDequeTest {
 
     @Test
     public void testRandom2() {
-        ArrayDeque<Integer> ArrayDeque = new ArrayDeque<>();
-        ArrayDeque.addFirst(0);
-        ArrayDeque.addFirst(1);
-        int act1 = ArrayDeque.removeFirst();
-        int act2 = ArrayDeque.removeFirst();
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        A.addFirst(0);
+        A.addFirst(1);
+        int act1 = A.removeFirst();
+        int act2 = A.removeFirst();
         int exp1 = 1;
         int exp2 = 0;
 

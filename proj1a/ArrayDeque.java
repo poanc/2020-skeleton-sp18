@@ -2,7 +2,7 @@ public class ArrayDeque<T> {
 
 
     private int size;
-    private T items[];
+    private T[] items;
     private int nextFirst;
     private int nextLast;
     private int capacity;
@@ -46,7 +46,7 @@ public class ArrayDeque<T> {
     public void printDeque() {
         int count = size;
         int p = nextFirst;
-        while(count != 0) {
+        while  (count != 0) {
             System.out.print(items[p + 1] + " ");
             count--;
             p = (p + 1) % capacity;
@@ -55,7 +55,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
         if (getUA() < 0.25) {
             resize(items.length / 2);
         }
@@ -69,7 +71,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
         if (getUA() < 0.25) {
             resize(items.length / 2);
         }
@@ -83,23 +87,24 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if (index > size) return null;
+        if (index > size) {
+            return null;
+        }
         int p = (nextFirst + 1 + index) % capacity;
         return items[p];
     }
 
-    public void resize(int newCapacity) {
+    private void resize(int newCapacity) {
         T[] copy = (T[]) new Object[newCapacity];
         int count = size;
         int start = 0;
         int p = nextFirst + 1;
-        while(count != 0) {
+        while (count != 0) {
             copy[start] = items[Math.floorMod(p, capacity)];
             start++;
             count--;
             p++;
         }
-//        System.arraycopy(items, 0, copy, 0, size);
         items = copy;
         capacity = newCapacity;
         nextFirst = capacity - 1;
