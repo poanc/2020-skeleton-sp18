@@ -28,7 +28,6 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome("jump"));
         assertFalse(palindrome.isPalindrome("cat"));
         assertFalse(palindrome.isPalindrome("taT"));
-
     }
 
     @Test
@@ -37,13 +36,14 @@ public class TestPalindrome {
 
     }
 
+
     @Test
     public void testCharacterComparator() {
 
         OffByOne obo = new OffByOne();
 
-        assertTrue(palindrome.isPalindrome("flask", obo));
-
+        assertTrue(palindrome.isPalindrome("flake", obo));
+        assertTrue(palindrome.isPalindrome("&%", obo));
 
     }
 

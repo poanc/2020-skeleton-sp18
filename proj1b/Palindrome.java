@@ -30,7 +30,7 @@ public class Palindrome {
         }
         Character first = (Character) deque.removeFirst();
         Character last = (Character) deque.removeLast();
-        return first.equals(last) && isPalindrome(deque);
+        return Math.abs(first - last) == 0 && isPalindrome(deque);
     }
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
@@ -49,7 +49,7 @@ public class Palindrome {
         Character last = (Character) deque.removeLast();
 
 
-        return cc.equalChars(first, last) && isPalindrome(deque);
+        return cc.equalChars(first, last) && isPalindrome(deque, cc);
     }
 
 
