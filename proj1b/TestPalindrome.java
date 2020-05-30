@@ -46,4 +46,16 @@ public class TestPalindrome {
 
 
     }
+
+    @Test
+    public void testCharacterComparator1() {
+
+        OffByN offBy5 = new OffByN(5);
+
+        assertFalse(palindrome.isPalindrome("ab", offBy5));
+        assertFalse(palindrome.isPalindrome("ab", offBy5));
+
+
+
+    }
 }

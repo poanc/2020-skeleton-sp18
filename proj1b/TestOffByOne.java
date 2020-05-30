@@ -20,6 +20,4 @@ public class TestOffByOne {
         assertTrue(offByOne.equalChars('r', 'q'));
 
     }
-    // Your tests go here.
-//    Uncomment this class once you've created your CharacterComparator interface and OffByOne class. **/
 }

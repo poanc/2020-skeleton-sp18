@@ -7,7 +7,8 @@ public class Palindrome {
 
         char[] chars = word.toCharArray();
         for (Character c : chars) {
-           toReturn.addLast(c);
+
+            toReturn.addLast(c);
         }
 
         return toReturn;
@@ -36,7 +37,7 @@ public class Palindrome {
 
         Deque<Character> toCheck = wordToDeque(word);
 
-        return true;
+        return isPalindrome(toCheck, cc);
 
     }
 
