@@ -49,13 +49,62 @@ public class TestPalindrome {
 
     @Test
     public void testCharacterComparator1() {
-
         OffByN offBy5 = new OffByN(5);
-
         assertFalse(palindrome.isPalindrome("ab", offBy5));
-        assertFalse(palindrome.isPalindrome("ab", offBy5));
-
-
+        assertFalse(palindrome.isPalindrome("a", offBy5));
 
     }
+
+    @Test
+    public void testCharacterComparatorOffOneTrue() {
+        OffByOne obo = new OffByOne();
+
+        assertTrue(palindrome.isPalindrome("flake", obo));
+        assertTrue(palindrome.isPalindrome("a", obo));
+        assertTrue(palindrome.isPalindrome("ab", obo));
+
+    }
+
+    @Test
+    public void testCharacterComparatorOffOneCornerCase() {
+        OffByOne obo = new OffByOne();
+
+        assertTrue(palindrome.isPalindrome("a", obo));
+        assertTrue(palindrome.isPalindrome("Z", obo));
+        assertTrue(palindrome.isPalindrome("C", obo));
+        assertTrue(palindrome.isPalindrome("bc", obo));
+        assertTrue(palindrome.isPalindrome("ab", obo));
+        assertTrue(palindrome.isPalindrome("yxz", obo));
+
+    }
+
+    @Test
+    public void testCharacterComparatorOffOneCornerCase1() {
+        OffByOne obo = new OffByOne();
+
+        assertTrue(palindrome.isPalindrome("", obo));
+        assertTrue(palindrome.isPalindrome(" ", obo));
+        assertTrue(palindrome.isPalindrome("  ", obo));
+        assertTrue(palindrome.isPalindrome("   ", obo));
+
+    }
+
+    @Test
+    public void testCharacterComparatorOffOneCornerCase2() {
+        OffByOne obo = new OffByOne();
+
+        assertFalse(palindrome.isPalindrome(" a", obo));
+        assertFalse(palindrome.isPalindrome("b  ", obo));
+        assertTrue(palindrome.isPalindrome("b a", obo));
+
+    }
+
+    @Test
+    public void testCharacterComparatorOffOneFalse() {
+        OffByOne obo = new OffByOne();
+
+        assertFalse(palindrome.isPalindrome("za", obo));
+
+    }
+
 }

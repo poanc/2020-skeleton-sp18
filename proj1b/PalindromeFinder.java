@@ -2,7 +2,7 @@
 public class PalindromeFinder {
 
     public static void main(String[] args) {
-        int minLength = 4;
+        int minLength = 0;
         In in = new In("../library-sp18/data/words.txt");
         Palindrome palindrome = new Palindrome();
 
