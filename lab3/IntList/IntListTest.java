@@ -82,4 +82,104 @@ public class IntListTest {
         IntList act = IntList.reverse(A);
         assertSame(exp, act);
     }
+
+    @Test
+    public void testSquareIterative() {
+        IntList A = IntList.of(1, 2, 3);
+        IntList toCheck = IntList.squareIterative(A);
+        assertNotEquals(A, toCheck);
+    }
+
+    @Test
+    public void testSquareIterative2() {
+        IntList A = IntList.of(8, 5, 10);
+        IntList toCheck = IntList.squareIterative(A);
+        IntList exp = IntList.of(64, 25, 100);
+        assertEquals(exp, toCheck);
+    }
+
+    @Test
+    public void testSquareMutative() {
+        IntList A = IntList.of(1, 2, 3);
+        IntList toCheck = IntList.squareMutativeIterative(A);
+        assertEquals(A, toCheck);
+    }
+
+    @Test
+    public void testSquareMutative2() {
+        IntList A = IntList.of(1, 2, 3);
+        IntList toCheck = IntList.squareMutativeIterative(A);
+        IntList exp = IntList.of(64, 25, 100);
+        assertNotEquals(exp, toCheck);
+    }
+
+    @Test
+    public void testSquareMutativeRecursive() {
+        IntList A = IntList.of(1, 2, 3);
+        IntList toCheck = IntList.squareMutativeRecursive(A);
+        assertEquals(A, toCheck);
+    }
+
+    @Test
+    public void testSquarMutativeeRecursive2() {
+        IntList A = IntList.of(8, 5, 10);
+        IntList toCheck = IntList.squareMutativeRecursive(A);
+        IntList exp = IntList.of(64, 25, 100);
+        assertEquals(exp, toCheck);
+    }
+
+    @Test
+    public void testSquareRecursive() {
+        IntList A = IntList.of(1, 2, 3);
+        IntList toCheck = IntList.squareRecursive(A);
+        assertNotEquals(A, toCheck);
+    }
+    @Test
+    public void testSquareRecursive2() {
+        IntList A = IntList.of(8, 5, 10);
+        IntList toCheck = IntList.squareRecursive(A);
+        IntList exp = IntList.of(64, 25, 100);
+        assertEquals(exp, toCheck);
+    }
+
+    @Test
+    public void testSkippify() {
+        IntList A = IntList.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        A.skippify();
+        IntList exp = IntList.of(1, 3, 6, 10);
+        assertEquals(exp, A);
+    }
+
+    @Test
+    public void testSkippify2() {
+        IntList B = IntList.of(9, 8, 7, 6, 5, 4, 3, 2, 1);
+        B.skippify();
+
+        IntList exp = IntList.of(9, 7, 4);
+        assertEquals(exp, B);
+    }
+
+    @Test
+    public void testRemoveDuplicate() {
+        IntList A = IntList.of(1, 2, 2, 2, 3);
+        IntList.removeDuplicates(A);
+        IntList exp = IntList.of(1, 2, 3);
+        assertEquals(exp, A);
+    }
+
+    @Test
+    public void testRemoveDuplicate2() {
+        IntList A = IntList.of();
+        IntList.removeDuplicates(A);
+        IntList exp = IntList.of();
+        assertEquals(exp, A);
+    }
+
+    @Test
+    public void testRemoveDuplicate3() {
+        IntList A = IntList.of(1, 1, 1, 2, 3, 3, 3, 4, 5, 6, 6, 6, 7);
+        IntList.removeDuplicates(A);
+        IntList exp = IntList.of(1, 2, 3, 4, 5, 6, 7);
+        assertEquals(exp, A);
+    }
 }

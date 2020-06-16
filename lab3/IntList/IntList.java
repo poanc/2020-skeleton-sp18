@@ -137,6 +137,101 @@ public class IntList {
         return toReturn;
     }
 
+    public static IntList squareIterative(IntList A) {
+        if (A == null) {
+            return null;
+        }
+        IntList p = A;
+        IntList toReturn = new IntList(A.first * A.first, null);
+        p = p.rest;
+        IntList p2 = toReturn;
+
+        while(p != null) {
+            p2.rest = new IntList(p.first * p.first, null);
+            p = p.rest;
+            p2 = p2.rest;
+        }
+        return toReturn;
+    }
+
+    public static IntList squareMutativeIterative(IntList A) {
+
+        IntList p = A;
+        while(p != null) {
+            p.first = p.first * p.first;
+            p = p.rest;
+        }
+        return A;
+
+    }
+
+    public static IntList squareMutativeRecursive(IntList A) {
+        if (A == null) {
+            return null;
+        }
+        IntList.squareMutativeRecursive(A.rest);
+        A.first = A.first * A.first;
+        return A;
+    }
+
+    public static IntList squareRecursive(IntList A) {
+        if (A.rest == null) {
+            return new IntList(A.first * A.first, null);
+        }
+        IntList toReturn = squareRecursive(A.rest);
+        toReturn = new IntList(A.first * A.first, toReturn);
+
+        return toReturn;
+    }
+
+    public void skippify() {
+        IntList p = this;
+        int n = 1;
+        while (p != null) {
+
+            IntList next = p;
+
+            for (int i = 0; i <= n; i++) {
+                next = next.rest;
+                if (next == null) {
+                    break;
+                }
+            }
+            p.rest = next;
+            p = p.rest;
+            n++;
+        }
+    }
+
+    /**
+     * Given a sorted linked list of items - remove duplicates.
+     * For example given 1 -> 2 -> 2 -> 2 -> 3,
+     * Mutate it to become 1 -> 2 -> 3 (destructively)
+     */
+    public static void removeDuplicates(IntList p) {
+        if (p == null) {
+            return;
+        }
+
+        IntList current = p.rest;
+
+        IntList previous = p;
+
+        while (current != null) {
+
+            if (current.first != previous.first) {
+
+                previous = current;
+                current = current.rest;
+            } else {
+                previous.rest = current.rest;
+
+                current = current.rest;
+            }
+        }
+    }
+
+
 
 
 
