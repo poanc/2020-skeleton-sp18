@@ -1,7 +1,6 @@
 // Make sure to make this class a part of the synthesizer package
 
 package synthesizer;
-import synthesizer.AbstractBoundedQueue;
 
 import java.util.Iterator;
 
