@@ -1,4 +1,4 @@
-// TODO: Make sure to make this class a part of the synthesizer package
+// Make sure to make this class a part of the synthesizer package
 package synthesizer;
 
 
@@ -37,10 +37,10 @@ public class GuitarString {
         double r = Math.random() - 0.5;
 
         Make sure that your random numbers are different from each other. */
-        while(!buffer.isEmpty()) {
+        while (!buffer.isEmpty()) {
             buffer.dequeue();
         }
-        while(!buffer.isFull()) {
+        while (!buffer.isFull()) {
             double r = Math.random() - 0.5;
             buffer.enqueue(r);
         }
