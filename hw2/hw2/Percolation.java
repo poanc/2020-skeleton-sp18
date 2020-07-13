@@ -48,13 +48,24 @@ public class Percolation {
 
         int neighbor = toPosition(row - 1, col);
 
-        if (isInTheBound(row - 1, col) && isOpen(row - 1, col)) per.union(position, neighbor);
+        if (isInTheBound(row - 1, col) && isOpen(row - 1, col)) {
+            per.union(position, neighbor);
+        }
+
         neighbor = toPosition(row + 1, col);
-        if (isInTheBound(row + 1, col) && isOpen(row + 1, col)) per.union(position, neighbor);
+        if (isInTheBound(row + 1, col) && isOpen(row + 1, col)) {
+            per.union(position, neighbor);
+        }
+
         neighbor = toPosition(row, col - 1);
-        if (isInTheBound(row, col - 1) && isOpen(row, col - 1)) per.union(position, neighbor);
+        if (isInTheBound(row, col - 1) && isOpen(row, col - 1)) {
+            per.union(position, neighbor);
+        }
+
         neighbor = toPosition(row, col + 1);
-        if (isInTheBound(row, col + 1) && isOpen(row, col + 1)) per.union(position, neighbor);
+        if (isInTheBound(row, col + 1) && isOpen(row, col + 1)) {
+            per.union(position, neighbor);
+        }
 
     }
 
@@ -75,7 +86,9 @@ public class Percolation {
             throw new IndexOutOfBoundsException("Out of bounds!");
         }
 
-        if (!isOpen(row, col)) return false;
+        if (!isOpen(row, col)) {
+            return false;
+        }
 
         int toCheck = toPosition(row, col);
 

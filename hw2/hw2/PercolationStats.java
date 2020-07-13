@@ -19,15 +19,18 @@ public class PercolationStats {
             throw new IllegalArgumentException("Illegal Argument!");
         }
         this.T = T;
+        thredholds = new double[T];
         for (int i = 0; i < T; i += 1) {
             Percolation p = pf.make(N);
 
-            while(p.percolates()) {
+            while(!p.percolates()) {
                 int randomRow = RANDOM.nextInt(N);
                 int randomCol = RANDOM.nextInt(N);
-                p.open(randomRow, randomCol);
+                if (!p.isOpen(randomRow, randomCol)) {
+                    p.open(randomRow, randomCol);
+                }
             }
-            thredholds[i] = p.numberOfOpenSites() / N;
+            thredholds[i] = (double) p.numberOfOpenSites() / N;
         }
 
     }
@@ -39,6 +42,9 @@ public class PercolationStats {
 
     // sample standard deviation of percolation threshold
     public double stddev() {
+        if (T == 1) {
+            return Double.NaN;
+        }
         return StdStats.stddev(thredholds);
     }
 
