@@ -97,18 +97,7 @@ public class Percolation {
             return false;
         }
 
-        int toCheck = toPosition(row, col);
-
-        /** Check if the site is simultaneously connect with the sites both on top and bottom */
-
-
-        for (int i = 0; i < N; i += 1) {
-            int topPosition = toPosition(0, i);
-            if (per.connected(toCheck, topPosition)) {
-                return true;
-            }
-        }
-        return false;
+        return per.find(toPosition(row, col)) < N;
 
     }
 
