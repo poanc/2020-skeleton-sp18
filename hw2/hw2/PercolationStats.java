@@ -8,7 +8,7 @@ public class PercolationStats {
 
     private Percolation p;
     private int T;
-    private double thredholds[];
+    private double[] thredholds;
     private static final long SEED = 2913431;
     private static final Random RANDOM = new Random(SEED);
 
@@ -23,14 +23,13 @@ public class PercolationStats {
         for (int i = 0; i < T; i += 1) {
             Percolation p = pf.make(N);
 
-            while(!p.percolates()) {
+            while (!p.percolates()) {
                 int randomRow = RANDOM.nextInt(N);
                 int randomCol = RANDOM.nextInt(N);
                 if (!p.isOpen(randomRow, randomCol)) {
                     p.open(randomRow, randomCol);
                 }
             }
-            System.out.println((double) p.numberOfOpenSites() / ( N * N));
             thredholds[i] = (double) p.numberOfOpenSites() / (N * N);
         }
 

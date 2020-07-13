@@ -24,7 +24,7 @@ public class TestPercolation {
     @Test
     public void testIsFull() {
         Percolation p = new Percolation(2);
-        p.open(0,0);
+        p.open(0, 0);
         p.open(0, 1);
         assertTrue(p.isFull(0, 0));
         p.open(1, 0);

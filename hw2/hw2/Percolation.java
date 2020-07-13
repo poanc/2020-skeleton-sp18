@@ -9,6 +9,8 @@ public class Percolation {
     private boolean[] perOpen;
     private int N;
     private int openCount;
+    private int virtualTopIndex;
+    private int virtualBottomIndex;
 
     // create N-by-N grid, with all sites initially blocked
     public Percolation(int N) {
@@ -32,9 +34,20 @@ public class Percolation {
          */
 
         /** Initiate the disjoint set to implement the data structure */
-        per = new WeightedQuickUnionUF(N * N);
-        perOpen = new boolean[N * N];
+        per = new WeightedQuickUnionUF(N * N + 2);
+
         this.N = N;
+
+        virtualTopIndex = N * N;
+
+        virtualBottomIndex = N * N + 1;
+
+        for (int i = 0; i < N; i += 1) {
+            per.union(i, virtualTopIndex);
+            per.union(N * N - 1 - i, virtualBottomIndex);
+        }
+        perOpen = new boolean[N * N];
+
         openCount = 0;
 
     }
@@ -97,7 +110,11 @@ public class Percolation {
             return false;
         }
 
-        return per.find(toPosition(row, col)) < N;
+        int toCheck = toPosition(row, col);
+
+        /** Check if the site is simultaneously connect with the sites both on top and bottom */
+
+        return per.connected(toCheck,  virtualTopIndex);
 
     }
 
@@ -108,12 +125,7 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        for (int i = 0; i < N; i += 1) {
-            if (isFull(N - 1, i)) {
-                return true;
-            }
-        }
-        return false;
+        return per.connected(virtualTopIndex, virtualBottomIndex);
     }
 
     private int toPosition(int row, int col) {
