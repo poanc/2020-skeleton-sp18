@@ -30,7 +30,8 @@ public class PercolationStats {
                     p.open(randomRow, randomCol);
                 }
             }
-            thredholds[i] = (double) p.numberOfOpenSites() / N;
+            System.out.println((double) p.numberOfOpenSites() / ( N * N));
+            thredholds[i] = (double) p.numberOfOpenSites() / (N * N);
         }
 
     }

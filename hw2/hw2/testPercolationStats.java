@@ -3,7 +3,7 @@ package hw2;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class testPercolationStats {
+public class TestPercolationStats {
 
     @Test
     public void testIsOpen() {

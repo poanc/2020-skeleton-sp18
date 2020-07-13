@@ -1,7 +1,6 @@
 package hw2;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import edu.princeton.cs.algs4.QuickFindUF;
 
 
 public class Percolation {
@@ -9,6 +8,7 @@ public class Percolation {
     private WeightedQuickUnionUF per;
     private boolean[] perOpen;
     private int N;
+    private int openCount;
 
     // create N-by-N grid, with all sites initially blocked
     public Percolation(int N) {
@@ -35,6 +35,7 @@ public class Percolation {
         per = new WeightedQuickUnionUF(N * N);
         perOpen = new boolean[N * N];
         this.N = N;
+        openCount = 0;
 
     }
 
@@ -43,8 +44,14 @@ public class Percolation {
         if (!isInTheBound(row, col)) {
             throw new IndexOutOfBoundsException("Out of bounds!");
         }
+
+        if (isOpen(row, col)) {
+            return;
+        }
+
         int position = toPosition(row, col);
         perOpen[position] = true;
+        openCount += 1;
 
         int neighbor = toPosition(row - 1, col);
 
@@ -107,21 +114,17 @@ public class Percolation {
 
     // number of open sites
     public int numberOfOpenSites() {
-        int count = 0;
-        for (int i = 0; i < perOpen.length; i += 1) {
-            if (perOpen[i]) count += 1;
-        }
-        return count;
+        return openCount;
     }
 
     // does the system percolate?
     public boolean percolates() {
-      for (int i = 0; i < N; i += 1) {
-          if (isFull(N - 1, i)) {
-              return true;
-          }
-      }
-      return false;
+        for (int i = 0; i < N; i += 1) {
+            if (isFull(N - 1, i)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private int toPosition(int row, int col) {

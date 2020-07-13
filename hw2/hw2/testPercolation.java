@@ -3,7 +3,7 @@ package hw2;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class testPercolation {
+public class TestPercolation {
 
     @Test
     public void testIsOpen() {
@@ -26,9 +26,9 @@ public class testPercolation {
         Percolation p = new Percolation(2);
         p.open(0,0);
         p.open(0, 1);
-        assertFalse(p.isFull(0, 0));
-        p.open(1, 0);
         assertTrue(p.isFull(0, 0));
+        p.open(1, 0);
+        assertTrue(p.percolates());
     }
 
     @Test
