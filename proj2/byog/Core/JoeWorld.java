@@ -13,10 +13,9 @@ import java.util.Random;
 public class JoeWorld {
     private static final int WIDTH = 80;
     private static final int HEIGHT = 30;
-    private static final int BOUND = 10;
-
-
-    private static final long SEED = 28731;
+    private static final int BOUND = 4;
+    private static final int ITERATE_TIME = 3000;
+    private static final long SEED = 28732;
     private static final Random RANDOM = new Random(SEED);
 
     // Should keep track of the USER i.e. the floor
@@ -28,14 +27,19 @@ public class JoeWorld {
         /** Create a point that play the role of "floor"
          * Would track its path */
         Point s = randomPoint(WIDTH, HEIGHT);
+//        Point s = new Point(40, 15);
         Tracker t = new Tracker(s.x, s.y);
-        for (int i = 0; i < 1500; i += 1) {
+//        addRoom(world, t, 5, 5, 1 , 1);
+//        addRoom(world, t, 6, 6, -1 , -1);
+        for (int i = 0; i < ITERATE_TIME; i += 1) {
+//            addRoom(world, t, randomInt(BOUND), randomInt(BOUND));
+
             randomOperation(world, t);
         }
     }
 
     private static void randomOperation(TETile[][] world, Tracker t) {
-        int operationNum = RANDOM.nextInt(1);
+        int operationNum = randomInt(1);
         switch (operationNum) {
             case 0:
                 addHallway(world, t, randomInt(BOUND));
@@ -77,10 +81,17 @@ public class JoeWorld {
         int signX = randomSign();
         int signY = randomSign();
 
-        Point copy = new Point(t.curr.x, t.curr.y);
+        Point copy = new Point(t.getX(), t.getY());
 
         if (isOutOfBound(copy, signX * width, signY * height)) {
             return;
+        }
+
+        if (t.isOverLap(copy, signX * width, signY * height)) {
+            System.out.println("IT do This !!!!!!");
+            return;
+        } else {
+            t.insertRoom(signX * width, signY * height);
         }
 
         /**  To add walls, start iterate the x-axis and y-axis with -1 and end with length + 1 */
@@ -89,17 +100,15 @@ public class JoeWorld {
 
                 Point p = new Point(copy.x + (signX * x), copy.y + (signY * y));
 
+                /** create walls of the room*/
                 if (x < 0 || x >= width || y < 0 || y >= height) {
+                    
                     /** Escape if the position is floor */
                     if (t.contains(p)) {
                         continue;
                     }
                     world[p.x][p.y] = Tileset.WALL;
                 } else {
-                    if (isOnTheBound(p)) {
-                        world[p.x][p.y] = Tileset.WALL;
-                        continue;
-                    }
                     world[p.x][p.y] = Tileset.FLOOR;
                     t.moveTo(p);
                 }
@@ -109,11 +118,20 @@ public class JoeWorld {
 
     private static void addRoom(TETile[][] world, Tracker t, int width, int height, int signX, int signY) {
 
-        Point copy = new Point(t.curr.x, t.curr.y);
+        Point copy = new Point(t.getX(), t.getY());
+
 
         if (isOutOfBound(copy, signX * width, signY * height)) {
             return;
         }
+
+        if (t.isOverLap(copy, signX * width, signY * height)) {
+            System.out.println("IT do This !!!!!!");
+            return;
+        } else {
+            t.insertRoom(signX * width, signY * height);
+        }
+
 
         /**  To add walls, start iterate the x-axis and y-axis with -1 and end with length + 1 */
         for (int x = -1; x < width + 1; x += 1) {
@@ -121,7 +139,9 @@ public class JoeWorld {
 
                 Point p = new Point(copy.x + (signX * x), copy.y + (signY * y));
 
+                /** create walls of the room*/
                 if (x < 0 || x >= width || y < 0 || y >= height) {
+
                     /** Escape if the position is floor */
                     if (t.contains(p)) {
                         continue;
@@ -135,13 +155,10 @@ public class JoeWorld {
         }
     }
 
+    /** Detect if the desired room is out of the canvas */
     private static boolean isOutOfBound(Point p, int width, int height) {
         Point d = new Point(p.x + width, p.y + height);
         return d.x < 0 || d.x > WIDTH - 1 || d.y < 0 || d.y > HEIGHT - 1;
-    }
-
-    private static boolean isOnTheBound(Point p) {
-        return p.x == 0 || p.x == WIDTH - 1 || p.y == 0 || p.y == HEIGHT - 1;
     }
 
     /** Picks a RANDOM tile */

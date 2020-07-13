@@ -18,4 +18,8 @@ public class Point {
     public String toString() {
         return x + "," + y;
     }
+
+    public static String toRoom(Point ori, Point newCorner) {
+        return ori.x + "," + ori.y + "," + newCorner.x + "," + newCorner.y;
+    }
 }

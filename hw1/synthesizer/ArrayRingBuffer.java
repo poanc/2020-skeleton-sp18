@@ -35,7 +35,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
 
     }
 
-    private class ArrayRingIterator<T> implements Iterator<T> {
+    public class ArrayRingIterator<T> implements Iterator<T> {
 
         private int ptr;
 
