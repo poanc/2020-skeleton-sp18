@@ -125,6 +125,9 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
+        if (N == 1 && openCount != 1) {
+            return false;
+        }
         return per.connected(virtualTopIndex, virtualBottomIndex);
     }
 

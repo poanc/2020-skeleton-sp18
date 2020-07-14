@@ -21,7 +21,7 @@ public class PercolationStats {
         this.T = T;
         thredholds = new double[T];
         for (int i = 0; i < T; i += 1) {
-            Percolation p = pf.make(N);
+            p = pf.make(N);
 
             while (!p.percolates()) {
                 int randomRow = RANDOM.nextInt(N);

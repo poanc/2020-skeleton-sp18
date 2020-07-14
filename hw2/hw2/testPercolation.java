@@ -43,4 +43,19 @@ public class TestPercolation {
         assertEquals(exp, act);
         assertEquals(exp2, act2);
     }
+
+    @Test
+    public void testN1() {
+        Percolation p = new Percolation(1);
+        assertFalse(p.percolates());
+    }
+
+    @Test
+    public void testN2() {
+        Percolation p = new Percolation(2);
+        p.open(0, 0);
+        p.open(0, 1);
+        assertFalse(p.percolates());
+    }
+
 }
