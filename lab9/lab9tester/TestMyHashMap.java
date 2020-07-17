@@ -127,6 +127,35 @@ public class TestMyHashMap {
         assertEquals(studentIDs.get("evil alan"), studentIDs.get("alan"));
     }
 
+    @Test
+    public void removeTest() {
+        MyHashMap<String, Integer> mhm = new MyHashMap<>();
+        mhm.put("hello", 5);
+        mhm.put("cat", 10);
+        mhm.put("fish", 22);
+        mhm.put("zebra", 90);
+        assertEquals(90, (int) mhm.remove("zebra"));
+        assertEquals(3, mhm.size());
+        assertEquals(null, mhm.remove("zebra"));
+        assertEquals(10, (int) mhm.remove("cat"));
+        assertEquals(2, mhm.size());
+    }
+
+    @Test
+    public void resizeTest() {
+        MyHashMap<String, Integer> mhm = new MyHashMap<>();
+        mhm.put("hello", 5);
+        mhm.put("cat", 10);
+        mhm.put("fish", 22);
+        mhm.put("zebra", 90);
+        assertEquals(90, (int) mhm.remove("zebra"));
+        assertEquals(3, mhm.size());
+        assertEquals(null, mhm.remove("zebra"));
+        assertEquals(10, (int) mhm.remove("cat"));
+        assertEquals(2, mhm.size());
+
+    }
+
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestMyHashMap.class);
     }

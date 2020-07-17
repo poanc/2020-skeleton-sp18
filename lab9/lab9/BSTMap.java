@@ -113,7 +113,121 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      */
     @Override
     public V remove(K key) {
-        return null;
+        if (get(key) == null) {
+            return null;
+        }
+        return removeHelper(key, root);
+    }
+
+    private V removeHelper(K key, Node p) {
+        Node keyNode = findKeyNode(key);
+        Node parentNode = findParent(key);
+
+        // no child
+        if (keyNode.left == null && keyNode.right == null) {
+            if (keyNode.equals(root)) {
+                clear();
+            } else if (parentNode.right != null && parentNode.right.key.compareTo(key) == 0) {
+                parentNode.right = null;
+            } else if (parentNode.left != null && parentNode.left.key.compareTo(key) == 0) {
+                parentNode.left = null;
+            }
+
+        // two child
+        } else if (keyNode.left != null && keyNode.right != null) {
+
+            if (keyNode.equals(root)) {
+                root = keyNode.left;
+                root.right = keyNode.right;
+            } else if (parentNode.right != null && parentNode.right.key.compareTo(key) == 0) {
+                Node leftNode = findMostLeftNode(keyNode);
+                parentNode.right = leftNode;
+                leftNode.right = keyNode.right;
+            } else {
+                Node rightNode = findMostRightNode(keyNode);
+                parentNode.left = rightNode;
+                rightNode.right = keyNode.left;
+            }
+
+        // one child
+        } else {
+
+            if (keyNode.equals(root)) {
+                if (keyNode.right != null) {
+                    root = keyNode.right;
+                } else {
+                    root = keyNode.left;
+                }
+            } else if (parentNode.right != null && parentNode.right.key.compareTo(key) == 0) {
+
+                if (keyNode.right != null) {
+                    parentNode.right = keyNode.right;
+                } else {
+                    parentNode.right = keyNode.left;
+                }
+
+            } else if (parentNode.left != null && parentNode.left.key.compareTo(key) == 0) {
+
+                if (keyNode.right != null) {
+                    parentNode.left = keyNode.right;
+                } else {
+                    parentNode.left = keyNode.left;
+                }
+            }
+        }
+
+        size -= 1;
+        return keyNode.value;
+    }
+
+    private Node findParent(K key) {
+        return findParentHelper(key, root);
+    }
+
+    private Node findParentHelper(K key, Node p) {
+        if (p == null) {
+            return null;
+        } else if (p.left != null && p.left.key.compareTo(key) == 0) {
+            return p;
+        } else if (p.right != null && p.right.key.compareTo(key) == 0) {
+            return p;
+        } else if (p.key.compareTo(key) > 0) {
+            p = findParentHelper(key, p.left);
+        } else if (p.key.compareTo(key) < 0) {
+            p = findParentHelper(key, p.right);
+        }
+        return p;
+    }
+
+    private Node findKeyNode(K key) {
+        return findKeyNodeHelper(key, root);
+    }
+
+    private Node findKeyNodeHelper(K key, Node p) {
+        if (p == null) {
+            return null;
+        } else if (p.key.compareTo(key) == 0) {
+            return p;
+        } else if (p.key.compareTo(key) > 0) {
+            p = findKeyNodeHelper(key, p.left);
+        } else if (p.key.compareTo(key) < 0) {
+            p = findKeyNodeHelper(key, p.right);
+        }
+        return p;
+    }
+
+    private Node findMostLeftNode(Node p) {
+        if (p.left == null) {
+            return p;
+        }
+        return findMostLeftNode(p.left);
+    }
+
+    private Node findMostRightNode(Node p) {
+        if (p.right == null) {
+            return p;
+        }
+        return findMostLeftNode(p.right);
     }
 
     /** Removes the key-value entry for the specified key only if it is
@@ -127,7 +241,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     @Override
     public Iterator<K> iterator() {
-        return null;
+        return keySet().iterator();
     }
 
     private void inOrderTraverse(Node p, Set<K> s) {
@@ -145,10 +259,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         bstmap.put("cat", 10);
         bstmap.put("fish", 22);
         bstmap.put("zebra", 90);
-        bstmap.get("fish");
-        Set<String> keySet = bstmap.keySet();
-        for (String s : keySet) {
-            System.out.println(s);
-        }
+
     }
 }
