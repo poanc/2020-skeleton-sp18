@@ -36,8 +36,21 @@ public class TestNiceSpreadOomage {
         List<Oomage> oomages = new ArrayList<>();
         int N = 100;
 
+        int L = StdRandom.uniform(5, 10);
+
         for (int i = 0; i < N; i += 1) {
-            oomages.add(NiceSpreadOomage.randomNiceSpreadOomage());
+
+            ArrayList<Integer> params = new ArrayList<>(N);
+            params.add(1);
+            params.add(2);
+            params.add(3);
+            params.add(4);
+            for (int x = 0; x < L - 4; x += 1) {
+                params.add(StdRandom.uniform(0, 255));
+            }
+            ComplexOomage co = new ComplexOomage(params);
+
+            oomages.add(co);
         }
 
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(oomages, 10));
