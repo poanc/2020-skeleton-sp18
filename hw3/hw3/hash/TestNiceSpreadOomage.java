@@ -34,7 +34,7 @@ public class TestNiceSpreadOomage {
     @Test
     public void testRandomOomagesHashCodeSpread() {
         List<Oomage> oomages = new ArrayList<>();
-        int N = 10000;
+        int N = 100;
 
         for (int i = 0; i < N; i += 1) {
             oomages.add(NiceSpreadOomage.randomNiceSpreadOomage());
