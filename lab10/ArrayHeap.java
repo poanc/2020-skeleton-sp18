@@ -160,10 +160,10 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
          * swim the item
          */
         Node toInsert = new Node(item, priority);
-        int insertIndex = size() + 1;
-        contents[insertIndex] = toInsert;
+        int toInsertIndex = size() + 1;
         size += 1;
-        swim(insertIndex);
+        contents[toInsertIndex] = toInsert;
+        swim(toInsertIndex);
         return;
     }
 
