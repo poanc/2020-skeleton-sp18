@@ -3,6 +3,7 @@ package hw3.hash;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class HashTableVisualizer {
 
     public static void main(String[] args) {
