@@ -125,23 +125,34 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      * Bubbles down the node currently at the given index.
      */
     private void sink(int index) {
-
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-
         int leftIndex = leftIndex(index);
         int rightIndex = rightIndex(index);
-        int min = min(leftIndex, rightIndex);
+        Node leftNode = inBounds(leftIndex) ? contents[leftIndex] : null;
+        Node rightNode = inBounds(rightIndex) ? contents[rightIndex] : null;
+        Node node = getNode(index);
 
-        if (inBounds(leftIndex) && min(index, leftIndex) == leftIndex && min == leftIndex) {
+        if (rightNode == null && leftNode == null) {
+            return;
+        } else if (rightNode == null && node.myPriority <= leftNode.myPriority) {
+            return;
+        } else if (rightNode == null && node.myPriority > leftNode.myPriority) {
+            swap(index, leftIndex);
+        } else if (node.myPriority <= leftNode.myPriority && node.myPriority <= rightNode.myPriority) {
+            return;
+        } else if (node.myPriority > leftNode.myPriority && node.myPriority > rightNode.myPriority) {
+            int toSink = min(leftIndex, rightIndex);
+            swap(index, toSink);
+            sink(toSink);
+        } else if (node.myPriority > leftNode.myPriority) {
             swap(index, leftIndex);
             sink(leftIndex);
-        } else if (inBounds(rightIndex) && min(index, rightIndex) == rightIndex && min == rightIndex) {
+        } else if (node.myPriority > rightNode.myPriority) {
             swap(index, rightIndex);
             sink(rightIndex);
         }
-        return;
     }
 
     /**
@@ -160,8 +171,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
          * swim the item
          */
         Node toInsert = new Node(item, priority);
-        int toInsertIndex = size() + 1;
+
         size += 1;
+        int toInsertIndex = size;
         contents[toInsertIndex] = toInsert;
         swim(toInsertIndex);
         return;
@@ -509,6 +521,58 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         pq.insert("c", 3);
         assertEquals("c", pq.removeMin());
 
+    }
+
+    @Test
+    public void testRandom2() {
+        ExtrinsicPQ<String> pq = new ArrayHeap<>();
+        pq.insert("c", 3);
+        assertEquals("c", pq.removeMin());
+        pq.insert("b", 4);
+        assertEquals("b", pq.removeMin());
+
+
+
+    }
+
+    @Test
+    public void testIncresingPriority1() {
+        ExtrinsicPQ<String> pq = new ArrayHeap<>();
+        pq.insert("a", 1);
+        pq.insert("b", 2);
+        pq.insert("c", 3);
+        pq.insert("d", 4);
+        pq.insert("e", 5);
+        pq.insert("f", 6);
+        pq.insert("g", 7);
+        pq.insert("h", 8);
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+    }
+
+    @Test
+    public void testDecresingPriority1() {
+        ExtrinsicPQ<String> pq = new ArrayHeap<>();
+        pq.insert("a", 8);
+        pq.insert("b", 7);
+        pq.insert("c", 6);
+        pq.insert("d", 5);
+        pq.insert("e", 4);
+        pq.insert("f", 3);
+        pq.insert("g", 2);
+        pq.insert("h", 1);
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
     }
 
 }
