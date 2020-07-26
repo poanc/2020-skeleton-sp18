@@ -235,7 +235,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
          */
         Node toCompare = new Node(item, priority);
         for (int i = 1; i < size(); i += 1) {
-            if (toCompare.equals(getNode(i))) {
+            if (toCompare.item().equals(getNode(i).item())){
                 getNode(i).myPriority = priority;
                 swim(i);
                 sink(i);
@@ -312,22 +312,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             return myItem.toString() + ", " + myPriority;
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (o == null) {
-                return false;
-            }
 
-            if (o.getClass() != this.getClass()) {
-                return false;
-            }
-
-            Node obj = (Node) o;
-            if (this.myItem == obj.myItem) {
-                return true;
-            }
-            return false;
-        }
     }
 
 
