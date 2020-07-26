@@ -125,34 +125,23 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      * Bubbles down the node currently at the given index.
      */
     private void sink(int index) {
+
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
+
         int leftIndex = leftIndex(index);
         int rightIndex = rightIndex(index);
-        Node leftNode = inBounds(leftIndex) ? contents[leftIndex] : null;
-        Node rightNode = inBounds(rightIndex) ? contents[rightIndex] : null;
-        Node node = getNode(index);
+        int min = min(leftIndex, rightIndex);
 
-        if (rightNode == null && leftNode == null) {
-            return;
-        } else if (rightNode == null && node.myPriority <= leftNode.myPriority) {
-            return;
-        } else if (rightNode == null && node.myPriority > leftNode.myPriority) {
-            swap(index, leftIndex);
-        } else if (node.myPriority <= leftNode.myPriority && node.myPriority <= rightNode.myPriority) {
-            return;
-        } else if (node.myPriority > leftNode.myPriority && node.myPriority > rightNode.myPriority) {
-            int toSink = min(leftIndex, rightIndex);
-            swap(index, toSink);
-            sink(toSink);
-        } else if (node.myPriority > leftNode.myPriority) {
+        if (inBounds(leftIndex) && min(index, leftIndex) == leftIndex && min == leftIndex) {
             swap(index, leftIndex);
             sink(leftIndex);
-        } else if (node.myPriority > rightNode.myPriority) {
+        } else if (inBounds(rightIndex) && min(index, rightIndex) == rightIndex && min == rightIndex) {
             swap(index, rightIndex);
             sink(rightIndex);
         }
+        return;
     }
 
     /**
@@ -204,6 +193,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
          * swap the smallest item with the last item in the array.
          * sink the root node
          */
+        if (size < 1) {
+            return null;
+        }
         Node smallest = getNode(1);
         swap(1, size());
         contents[size()] = null;
@@ -573,6 +565,32 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         pq.removeMin();
         pq.removeMin();
         pq.removeMin();
+    }
+
+    @Test
+    public void testSinkSuck1() {
+        ExtrinsicPQ<String> pq = new ArrayHeap<>();
+        pq.insert("a", 8);
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+        pq.removeMin();
+
+
+    }
+
+    @Test
+    public void testSinkSuck2() {
+        ExtrinsicPQ<String> pq = new ArrayHeap<>();
+        pq.insert("a", 1);
+        pq.insert("b", 3);
+        pq.insert("c", 4);
+        pq.insert("d", 6);
+        pq.insert("e", 7);
+
+        pq.removeMin();
+
     }
 
 }
