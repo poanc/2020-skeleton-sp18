@@ -6,9 +6,9 @@ import java.util.*;
 
 public class Solver {
 
-    public int moves;
-    public ArrayDeque<WorldState> solution;
-    public HashMap<WorldState, Integer> estMap;
+    private int moves;
+    private ArrayDeque<WorldState> solution;
+    private HashMap<WorldState, Integer> estMap;
 
 
     /** Constructor which solves the puzzle, computing

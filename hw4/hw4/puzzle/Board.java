@@ -1,8 +1,6 @@
 package hw4.puzzle;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Board implements WorldState {
 
@@ -190,5 +188,8 @@ public class Board implements WorldState {
         return s.toString();
     }
 
+    public int hashCode() {
+        return tiles.hashCode();
+    }
 
 }
